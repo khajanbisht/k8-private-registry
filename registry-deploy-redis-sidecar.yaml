@@ -1,0 +1,64 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "wolt-registry"
+  labels:
+    app: "wolt-registry"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "wolt-registry"
+  template:
+    metadata:
+      labels:
+        app: "wolt-registry"
+    spec:
+      containers:
+      - name: "registrycontainer"
+        image: "registry:2"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+          name: "registry-port"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/docker/registry/config.yml
+          subPath: config.yml
+        - name: registry-pv-storage
+          mountPath: "/var/lib/registry" 
+        - name: htpasswd-volume
+          mountPath: "/registry_auth"
+          readOnly: true
+        env:
+        - name: REGISTRY_REDIS_ADDR
+          value: "redis-service"  
+        - name: REGISTRY_HTTP_ADDR
+          value: ":5000"
+        - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+          value: "/var/lib/registry" 
+        - name: REGISTRY_AUTH
+          value: "htpasswd"
+        - name: REGISTRY_AUTH_HTPASSWD_REALM
+          value: "Authentication required"   
+        - name: REGISTRY_AUTH_HTPASSWD_PATH
+          value: "/registry_auth/htpasswd"
+        - name: REGISTRY_STORAGE_DELETE_ENABLED
+          value: "true"
+      - name: "rediscontainer"
+        image: "redis"
+        ports:
+        - containerPort: 6379
+          name: "redis-port"
+          protocol: TCP   
+      volumes:
+      - name: config-volume
+        configMap:
+          name: registry-config-cm
+      - name: registry-pv-storage
+        persistentVolumeClaim:
+          claimName: registry-pv-claim
+      - name: htpasswd-volume
+        secret:
+          secretName: registry-auth

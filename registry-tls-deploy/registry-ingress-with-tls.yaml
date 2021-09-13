@@ -1,0 +1,26 @@
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: registry-ingress-ssl
+spec:
+  domains:
+    - wolt.khajan.com
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: registry-ingress-tls
+  annotations:
+    kubernetes.io/ingress.class: gce
+    networking.gke.io/managed-certificates: registry-ingress-ssl
+spec:
+  rules:
+  - host: registry.wolt.khajan.com
+    http:
+      paths:
+      - backend:
+          serviceName: wolt-registry-service
+          servicePort: 5000
+        path: /
