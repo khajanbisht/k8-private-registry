@@ -101,13 +101,10 @@ List all remote repo
 
 
 To list all reposiotires in Private registry 
-curl -i \
--H 'Accept:application/json' \
--H 'Authorization:Basic a2hhamFuOmtoYWphbnBhc3N3b3Jk' \
-35.190.117.102:80/v2/_catalog
+- curl -i -H 'Accept:application/json' -H 'Authorization:Basic a2hhamFuOmtoYWphbnBhc3N3b3Jk' 35.190.117.102:80/v2/_catalog
 
 
 To List private repository tag
-curl -i -H 'Accept:application/json' -H 'Authorization:Basic a2hhamFuOmtoYWphbnBhc3N3b3Jk' 35.190.117.102:80/v2/<repo-name>/tags/list
+- curl -i -H 'Accept:application/json' -H 'Authorization:Basic a2hhamFuOmtoYWphbnBhc3N3b3Jk' 35.190.117.102:80/v2/<repo-name>/tags/list
 
 
