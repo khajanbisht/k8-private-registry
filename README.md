@@ -1,4 +1,4 @@
-# Wolt Assignment 
+# Assignment 
 
 Devops Assignment 1.2
 Question - The task is to write the Kubernetes deployment manifests to run Docker registry in Kubernetes with at least the following - deployment, service, persistent volume claim, garbage collect cron job, ingress, secret (if needed).
