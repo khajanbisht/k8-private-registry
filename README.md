@@ -108,3 +108,15 @@ To List private repository tag
 - curl -i -H 'Accept:application/json' -H 'Authorization:Basic a2hhamFuOmtoYWphbnBhc3N3b3Jk' 35.190.117.102:80/v2/<repo-name>/tags/list
 
 
+References 
+ 
+- Full explaned Docker registry Config file 
+https://docs.docker.com/registry/configuration/#list-of-configuration-options 
+
+- Garbage collection run on docker registry
+https://docs.docker.com/registry/garbage-collection/
+ 
+- Docker API to delete images 
+ https://docs.docker.com/registry/spec/api/#deleting-a-layer
+ 
+ 
