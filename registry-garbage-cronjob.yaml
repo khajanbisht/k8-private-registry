@@ -2,9 +2,9 @@
 apiVersion: "batch/v1beta1"
 kind: "CronJob"
 metadata:
-  name: "wolt-registry-cj"
+  name: "kp-registry-cj"
   labels:
-    app: "wolt-registry-cj"
+    app: "kp-registry-cj"
 spec:
   schedule: "0 1 * * *"  # Daily at 1am
   jobTemplate:
