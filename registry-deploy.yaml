@@ -2,18 +2,18 @@
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "wolt-registry"
+  name: "kp-registry"
   labels:
-    app: "wolt-registry"
+    app: "kp-registry"
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: "wolt-registry"
+      app: "kp-registry"
   template:
     metadata:
       labels:
-        app: "wolt-registry"
+        app: "kp-registry"
     spec:
       containers:
       - name: "registrycontainer"
